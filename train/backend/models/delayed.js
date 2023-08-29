@@ -1,9 +1,11 @@
+
+const apiKey= "7c99bdeb761844b08e940832abebd446";
 const fetch = require('node-fetch')
 
 const delayed = {
     getDelayedTrains: function getDelayedTrains(req, res) {
         const query = `<REQUEST>
-                  <LOGIN authenticationkey="${process.env.TRAFIKVERKET_API_KEY}" />
+                  <LOGIN authenticationkey="${apiKey}" />
                   <QUERY objecttype="TrainAnnouncement" orderby='AdvertisedTimeAtLocation' schemaversion="1.8">
                         <FILTER>
                         <AND>
