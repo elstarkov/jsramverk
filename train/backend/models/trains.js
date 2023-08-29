@@ -1,11 +1,13 @@
 const fetch = require('node-fetch')
 const EventSource = require('eventsource')
 
+const apiKey= "7c99bdeb761844b08e940832abebd446";
+
 async function fetchTrainPositions(io) {
 
 
     const query = `<REQUEST>
-    <LOGIN authenticationkey="${process.env.TRAFIKVERKET_API_KEY}" />
+    <LOGIN authenticationkey="${apiKey}" />
     <QUERY sseurl="true" namespace="järnväg.trafikinfo" objecttype="TrainPosition" schemaversion="1.0" limit="1" />
 </REQUEST>`
 
