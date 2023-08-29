@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 
 # Welcome to our project for the BTH course "JSRAMVERK".
 
@@ -46,8 +45,3 @@ What techniques are we using and why?
 
 How are we handling npm packages in terms of security?
 --------------------------------------------------------------------------------
-=======
-Hejsan det här är ett test
-
-Test från branch
->>>>>>> main
