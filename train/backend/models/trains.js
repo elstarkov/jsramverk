@@ -1,7 +1,8 @@
 const fetch = require('node-fetch')
 const EventSource = require('eventsource')
+const utilsModel = require('./utils.js');
 
-const apiKey= "7c99bdeb761844b08e940832abebd446";
+const apiKey = utilsModel.apiKey; 
 
 async function fetchTrainPositions(io) {
 

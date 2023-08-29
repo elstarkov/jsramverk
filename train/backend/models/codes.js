@@ -1,7 +1,8 @@
 const fetch = require('node-fetch')
 const database = require('../db/database.js');
+const utilsModel = require('./utils.js');
 
-const apiKey= "7c99bdeb761844b08e940832abebd446";
+const apiKey = utilsModel.apiKey;
 
 const codes = {
     getCodes: async function getCodes(req, res){

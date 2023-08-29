@@ -1,5 +1,7 @@
 
-const apiKey= "7c99bdeb761844b08e940832abebd446";
+const utilsModel = require('./utils.js');
+
+const apiKey = utilsModel.apiKey; 
 const fetch = require('node-fetch')
 
 const delayed = {
