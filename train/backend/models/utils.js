@@ -1,4 +1,5 @@
 const database = require('../db/database.js');
+const apiKey = "7c99bdeb761844b08e940832abebd446";
 
 const trains = {
     fetchAllDelayedTrains: async function fetchAllDelayedTrains() {
@@ -18,4 +19,4 @@ const trains = {
     }
 };
 
-module.exports = trains;
+module.exports = {trains, apiKey};
