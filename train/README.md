@@ -50,12 +50,12 @@ We managed to resolve the vulnerabilities by updating our packages with npm upda
 Below are the vulnerabilities:
 
 #### debug  <=2.6.8
-debug Inefficient Regular Expression Complexity vulnerability - [https://github.com/advisories/GHSA-9vvw-cc9w-f27h](https://github.com/advisories/GHSA-9vvw-cc9w-f27h)
-Regular Expression Denial of Service in debug - [https://github.com/advisories/GHSA-gxpj-cx7g-858c](https://github.com/advisories/GHSA-gxpj-cx7g-858c)
+debug Inefficient Regular Expression Complexity vulnerability - [https://github.com/advisories/GHSA-9vvw-cc9w-f27h](https://github.com/advisories/GHSA-9vvw-cc9w-f27h)  
+Regular Expression Denial of Service in debug - [https://github.com/advisories/GHSA-gxpj-cx7g-858c](https://github.com/advisories/GHSA-gxpj-cx7g-858c)  
 Depends on vulnerable versions of ms
 
 #### fresh  <0.5.2
-Regular Expression Denial of Service in fresh - [https://github.com/advisories/GHSA-9qj9-36jm-prpv](https://github.com/advisories/GHSA-9qj9-36jm-prpv)
+Regular Expression Denial of Service in fresh - [https://github.com/advisories/GHSA-9qj9-36jm-prpv](https://github.com/advisories/GHSA-9qj9-36jm-prpv)  
 
 #### mime  <1.4.1
 mime Regular Expression Denial of Service when mime lookup performed on untrusted user input - [https://github.com/advisories/GHSA-wrvr-8mpx-r7pp](https://github.com/advisories/GHSA-wrvr-8mpx-r7pp)
@@ -67,7 +67,7 @@ Vercel ms Inefficient Regular Expression Complexity vulnerability - [https://git
 node-fetch is vulnerable to Exposure of Sensitive Information to an Unauthorized Actor - [https://github.com/advisories/GHSA-r683-j2x4-v87g](https://github.com/advisories/GHSA-r683-j2x4-v87g)
 
 #### qs  <=6.2.3
-Prototype Pollution Protection Bypass in qs - [https://github.com/advisories/GHSA-gqgv-6jq5-jjj9](https://github.com/advisories/GHSA-gqgv-6jq5-jjj9)
+Prototype Pollution Protection Bypass in qs - [https://github.com/advisories/GHSA-gqgv-6jq5-jjj9](https://github.com/advisories/GHSA-gqgv-6jq5-jjj9)  
 qs vulnerable to Prototype Pollution - [https://github.com/advisories/GHSA-hrpp-h998-j3pp](https://github.com/advisories/GHSA-hrpp-h998-j3pp)
 
 #### semver  6.0.0 - 6.3.0 || 7.0.0 - 7.5.1
@@ -77,3 +77,10 @@ semver vulnerable to Regular Expression Denial of Service - [https://github.com/
 How are we handling npm packages in terms of security?
 --------------------------------------------------------------------------------
 We always try our best to keep our package list up to date to avoid vulnerabilities.
+
+
+## Issues with port 1337
+
+We encountered an issue with port 1337. I, Ylih, am using WSL2/Ubuntu and for some reason I couldn't get my backend to work when booting it on port 1337.
+I tried removing my firewall and I also tried using the command "lsof -i :1337" to see if I had a process hogging the port, but I didn't. 
+After a lot of research done by both me and elstarkov, and without finding an answer, I decided to try to use a different port. To our surprise, this change made the application work. Se we've decided to change from port 1337 to 6060.
