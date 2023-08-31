@@ -11,7 +11,6 @@ Trafikverket with an API.
 ## Work flow
 
 Here we will describe what we are doing and how.
-------------------------------------------------------------------------------
 
 To start with we created a user at www.trafiklab.se. From there we got an
 API-key which could be used to fetch the train data. In the next step we store
@@ -39,7 +38,18 @@ error messages and restore the database to default.
 ## Work choices
 
 What techniques are we using and why?
--------------------------------------------------------------------------------
+
+A big step in this course is to implement a JavaScript framework in the app.
+At start, this app consists of plain vanilla JavaScript. We will change that.
+
+We both have limited experience with big JS-frameworks such as
+Angular, React, and Vue. According to a survey at Stack Overflow [https://survey.stackoverflow.co/2023/#most-popular-technologies-webframe],
+React seems like the most used one. I (elstarkov) did a small project in both React and Angular just to try them
+out. While I thought both were good in different ways I found myself more confused with Angular due to my lack of
+familiarity with TypeScript. My opinion was therefore that React was probably easier to adapt to at first glance coming
+from zero experience. I shared these thoughts with my colleague Ylih. This in mind combined with the result of the survey
+showing that React is the most popular framework we have decided to go with React. We think it's good practice to learn and
+master the most popular framework first before moving on to others.
 
 ## NPM audit
 
@@ -74,8 +84,8 @@ qs vulnerable to Prototype Pollution - [https://github.com/advisories/GHSA-hrpp-
 semver vulnerable to Regular Expression Denial of Service - [https://github.com/advisories/GHSA-c2qf-rxjj-qqgw](https://github.com/advisories/GHSA-c2qf-rxjj-qqgw)
 
 
-How are we handling npm packages in terms of security?
---------------------------------------------------------------------------------
+## How are we handling npm packages in terms of security?
+
 We always try our best to keep our package list up to date to avoid vulnerabilities.
 
 
