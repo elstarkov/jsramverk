@@ -1,5 +1,7 @@
+
+const port = 6060;
+
 function renderMainView() {
-    const port = 6060;
     let container = document.getElementById("container");
 
     while (container.firstChild) {
