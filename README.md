@@ -83,7 +83,6 @@ qs vulnerable to Prototype Pollution - [https://github.com/advisories/GHSA-hrpp-
 #### semver  6.0.0 - 6.3.0 || 7.0.0 - 7.5.1
 semver vulnerable to Regular Expression Denial of Service - [https://github.com/advisories/GHSA-c2qf-rxjj-qqgw](https://github.com/advisories/GHSA-c2qf-rxjj-qqgw)
 
-
 ## How are we handling npm packages in terms of security?
 
 We always try our best to keep our package list up to date to avoid vulnerabilities.
