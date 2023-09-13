@@ -1,38 +1,47 @@
-const database = require('../db/database.js');
+
+const database = require('../db/mongo_database.js');
+require('dotenv').config();
 
 const tickets = {
     getTickets: async function getTickets(req, res){
-        var db = await database.openDb();
+        const db = await database.getDb();
 
-        var allTickets = await db.all(`SELECT *, ROWID as id FROM tickets ORDER BY ROWID DESC`);
+        try {
+            var allTickets = await db.collection.find({}).toArray();
 
-        await db.close();
-
-        return res.json({
-            data: allTickets
-        });
+            return res.json({
+                data: allTickets
+            });
+        } finally {
+            await db.client.close();
+        }
     },
 
     createTicket: async function createTicket(req, res){
-        var db = await database.openDb();
+        const db = await database.getDb();
 
-        const result = await db.run(
-            'INSERT INTO tickets (code, trainnumber, traindate) VALUES (?, ?, ?)',
-            req.body.code,
-            req.body.trainnumber,
-            req.body.traindate,
-        );
-
-        await db.close();
-
-        return res.json({
-            data: {
-                id: result.lastID,
+        try {
+            const count = await db.collection.countDocuments();
+            const doc = {
+                my_id: count + 1,
                 code: req.body.code,
                 trainnumber: req.body.trainnumber,
                 traindate: req.body.traindate,
             }
-        });
+
+            await db.collection.insertOne(doc);
+
+            return res.json({
+                data: {
+                    my_id: count + 1,
+                    code: req.body.code,
+                    trainnumber: req.body.trainnumber,
+                    traindate: req.body.traindate,
+                }
+            });
+        } finally {
+            await db.client.close();
+        }
     }
 };
 

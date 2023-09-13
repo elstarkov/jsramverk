@@ -148,7 +148,10 @@ function renderTicketView(item) {
     fetch(`http://localhost:${port}/tickets`)
         .then((response) => response.json())
         .then((result) => {
-            var lastId = result.data[1] ? result.data[1].id : 0;
+
+            result.data.sort().reverse();
+
+            var lastId = result.data.length > 0 ? result.data[0].my_id : 0;
 
             newTicketId = lastId + 1;
 
@@ -159,7 +162,7 @@ function renderTicketView(item) {
             result.data.forEach((ticket) => {
                 let element = document.createElement("div");
 
-                element.innerHTML = `${ticket.id} - ${ticket.code} - ${ticket.trainnumber} - ${ticket.traindate}`;
+                element.innerHTML = `${ticket.my_id} - ${ticket.code} - ${ticket.trainnumber} - ${ticket.traindate}`;
 
                 oldTickets.appendChild(element);
             });
