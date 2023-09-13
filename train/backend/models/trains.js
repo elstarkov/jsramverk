@@ -1,12 +1,10 @@
+
 const fetch = require('node-fetch')
 const EventSource = require('eventsource')
-const utilsModel = require('./utils.js');
 
-const apiKey = utilsModel.apiKey; 
+const apiKey = process.env.API_KEY;
 
 async function fetchTrainPositions(io) {
-
-
     const query = `<REQUEST>
     <LOGIN authenticationkey="${apiKey}" />
     <QUERY sseurl="true" namespace="järnväg.trafikinfo" objecttype="TrainPosition" schemaversion="1.0" limit="1" />
@@ -67,8 +65,6 @@ async function fetchTrainPositions(io) {
             return
         }
     })
-
-
 
     eventSource.onerror = function(e) {
         console.log("EventSource failed.")
