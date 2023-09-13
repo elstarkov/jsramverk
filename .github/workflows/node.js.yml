@@ -22,9 +22,6 @@ jobs:
     steps:
     - uses: actions/checkout@v3
 
-    - name: Change directory to train/backend
-      run: cd train/backend
-
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v3
       with:
@@ -36,4 +33,7 @@ jobs:
         mongodb-version: ${{ matrix.mongodb-version }}
 
     - run: npm install
+      working-directory: ./train/backend
+  
     - run: npm test
+      working-directory: ./train/backend
