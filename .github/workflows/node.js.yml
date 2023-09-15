@@ -32,10 +32,13 @@ jobs:
       with:
         mongodb-version: ${{ matrix.mongodb-version }}
 
-    - run: npm install
-      working-directory: ./train/backend
-
-    - env:
+    - name: Install and test
+      env:
+        JSRAMVERK_DSN: ${{ secrets.JSRAMVERK_DSN }}
         NODE_ENV: ${{ secrets.NODE_ENV }}
-      run: npm test
+      run: |
+        echo "Setting JSRAMVERK_DSN to $JSRAMVERK_DSN"
+        echo "Setting NODE_ENV to $NODE_ENV"
+        npm install
+        npm test
       working-directory: ./train/backend
