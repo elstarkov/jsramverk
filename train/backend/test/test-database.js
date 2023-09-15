@@ -6,7 +6,7 @@
 // * and that the local test database is not empty
 //
 
-require('dotenv').config();
+process.env.NODE_ENV = 'test';
 
 const chai = require('chai');
 const chaiHttp = require('chai-http');
@@ -15,6 +15,9 @@ const server = require('../app.js');
 chai.should();
 
 chai.use(chaiHttp);
+
+const dsn = "mongodb://localhost:27017/trains";
+process.env.JSRAMVERK_DSN = dsn;
 
 const database = require("../db/mongo_database.js");
 
