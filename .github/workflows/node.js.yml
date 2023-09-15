@@ -32,10 +32,12 @@ jobs:
       with:
         mongodb-version: ${{ matrix.mongodb-version }}
 
+    - run: npm install
+      working-directory: ./train/backend
+
     - name: Install and test
       run: |
         echo "${{ secrets.ENV_FILE }}" > .env
         cat .env
-        npm install
         npm test
       working-directory: ./train/backend
