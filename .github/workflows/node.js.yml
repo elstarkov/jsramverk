@@ -35,9 +35,12 @@ jobs:
     - run: npm install
       working-directory: ./train/backend
 
-    - name: Install and test
+    - name: test
+      env:
+        JSRAMVERK_DSN: ${{ secrets.JSRAMVERK_DSN }}
+        NODE_ENV: ${{ secrets.NODE_ENV }}
       run: |
-        echo "${{ secrets.ENV_FILE }}" > .env
-        cat .env
+        echo "Setting JSRAMVERK_DSN to $JSRAMVERK_DSN"
+        echo "Setting NODE_ENV to $NODE_ENV"
         npm test
       working-directory: ./train/backend
