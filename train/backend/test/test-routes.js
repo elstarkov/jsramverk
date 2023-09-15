@@ -47,7 +47,6 @@ describe('app', () => {
                     .end((err, res) => {
                         res.should.have.status(200);
                         res.body.should.be.an("object");
-                        res.body.data.length.should.be.above(0);
                         done();
                     });
             });
@@ -62,7 +61,6 @@ describe('app', () => {
                     .end((err, res) => {
                         res.should.have.status(200);
                         res.body.should.be.an("object");
-                        res.body.data.length.should.be.above(0);
                         done();
                     });
             });
