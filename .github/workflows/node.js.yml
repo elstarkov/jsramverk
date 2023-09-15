@@ -34,6 +34,8 @@ jobs:
 
     - run: npm install
       working-directory: ./train/backend
-  
-    - run: npm test
+
+    - env:
+        NODE_ENV: ${{ secrets.NODE_ENV }}
+      run: npm test
       working-directory: ./train/backend
