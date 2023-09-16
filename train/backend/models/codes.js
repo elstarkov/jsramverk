@@ -1,35 +1,32 @@
-const fetch = require('node-fetch')
-const database = require('../db/database.js');
-const utilsModel = require('./utils.js');
 
-const apiKey = utilsModel.apiKey;
+const fetch = require('node-fetch')
+
+const apiKey = process.env.API_KEY;
 
 const codes = {
     getCodes: async function getCodes(req, res){
         const query = `<REQUEST>
-                  <LOGIN authenticationkey="${apiKey}" />
-                  <QUERY objecttype="ReasonCode" schemaversion="1">
+                <LOGIN authenticationkey="${apiKey}" />
+                    <QUERY objecttype="ReasonCode" schemaversion="1">
                         <INCLUDE>Code</INCLUDE>
                         <INCLUDE>Level1Description</INCLUDE>
                         <INCLUDE>Level2Description</INCLUDE>
                         <INCLUDE>Level3Description</INCLUDE>
-                  </QUERY>
+                    </QUERY>
             </REQUEST>`;
 
 
-            const response = fetch(
-                "https://api.trafikinfo.trafikverket.se/v2/data.json", {
-                    method: "POST",
-                    body: query,
-                    headers: { "Content-Type": "text/xml" }
-                }
-            ).then(function(response) {
-                return response.json()
-            }).then(function(result) {
-                return res.json({
-                    data: result.RESPONSE.RESULT[0].ReasonCode
-                });
-            })
+        const response = await fetch(
+            "https://api.trafikinfo.trafikverket.se/v2/data.json", {
+                method: "POST",
+                body: query,
+                headers: { "Content-Type": "text/xml" }
+            });
+
+        const result = await response.json();
+        const reasonCodes = result.RESPONSE.RESULT[0].ReasonCode;
+
+        return res.json({ data: reasonCodes });
     }
 };
 
