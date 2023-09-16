@@ -1,0 +1,33 @@
+.delayed {
+    height: 100vh;
+    width: 40vw;
+    padding: 2rem;
+    overflow: scroll;
+    background-color: white;
+}
+
+.delayed-trains {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.2rem 0.8rem;
+    align-items: center;
+    cursor: pointer;
+}
+
+.delayed-trains-container {
+    border-top: 1px solid #ccc;
+}
+
+.delayed-trains-container:nth-child(odd) {
+    background-color: #eee;
+}
+
+.train-number {
+    font-size: 1.5rem;
+    font-weight: bold;
+    width: 30%;
+}
+
+.current-station {
+    width: 30%;
+}
