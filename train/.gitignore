@@ -1,3 +1,7 @@
 node_modules/
 .env
 *.sqlite
+
+# testing
+coverage
+.nyc_output

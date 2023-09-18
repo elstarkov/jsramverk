@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useLocation, Link } from "react-router-dom";
 import outputDelay from "../Utils";
-import api from "../api";
+import api from '../api';
 import TicketForm from '../components/TicketForm';
 import "./TicketPage.css";
 
