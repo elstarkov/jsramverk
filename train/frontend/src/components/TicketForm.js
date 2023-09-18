@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import api from '../api';
 import './TicketForm.css';
+
 function TicketForm(props) {
     const [codes, setCodes] = useState([]);
     const [currentCode, setCurrentCode] = useState('');

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import outputDelay from "../Utils";
-import api from "../api.js";
+import api from '../api';
 import "./DelayedTable.css";
 
 function DelayedTable() {

@@ -3,6 +3,7 @@ import { MapContainer, TileLayer } from 'react-leaflet';
 import './MapComponent.css';
 import io from 'socket.io-client';
 import L from 'leaflet';
+import { apiUrl } from '../api';
 
 function MapComponent() {
     const [markers, setMarkers] = useState({});
@@ -10,7 +11,7 @@ function MapComponent() {
     const mapRef = useRef(null);
 
     useEffect(() => {
-        const socket = io(`http://localhost:6060`);
+        const socket = io(`${apiUrl}`);
 
         socket.on("message", (data) => {
             setMarkers((prevMarkers) => ({
