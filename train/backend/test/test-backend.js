@@ -16,7 +16,8 @@ const dsn = "mongodb://localhost:27017/trains";
 process.env.JSRAMVERK_DSN = dsn;
 
 const socketIO = require('socket.io-client');
-const port = process.env.PORT || 6060;
+//const port = process.env.PORT || 6060;
+const port = 3000;
 
 const database = require("../db/mongo_database.js");
 const fetchTrainPositions = require("../models/trains.js");
