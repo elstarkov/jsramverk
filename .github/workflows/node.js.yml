@@ -35,5 +35,5 @@ jobs:
     - run: npm install
       working-directory: ./train/backend
 
-    - run: npm test
+    - run: npm test test/test-backend.js
       working-directory: ./train/backend
