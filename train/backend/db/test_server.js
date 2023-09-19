@@ -1,15 +1,16 @@
 
 
 /** JUST FOR TESTING
- * 
- * 
+*
+*
 /**
- * Connect to the database and search using a criteria.
- */
+* Connect to the database and search using a criteria.
+*/
 "use strict";
 
 // MongoDB
 const database = require('./mongo_database.js');
+
 require('dotenv').config();
 
 
@@ -32,11 +33,10 @@ app.get("/list", async (request, response) => {
 
         console.log(res);
         response.json(res);
-
-        } catch (err) {
-            console.log(err);
-            response.json(err);
-        }
+    } catch (err) {
+        console.log(err);
+        response.json(err);
+    }
 
     await db.client.close();
 });
@@ -49,7 +49,7 @@ app.post("/update", async (request, response) => {
             code: "1337",
             trainnumber: "TEST_TRAIN",
             traindate: "24/1337",
-        }
+        };
 
         const result = await db.collection.insertOne(doc);
 
@@ -60,7 +60,6 @@ app.post("/update", async (request, response) => {
         await db.client.close();
 
         response.status(200).json({ message: "Dokumentet har lagts till i databasen." });
-
     } catch (error) {
         console.error("Fel vid inlägg i databasen:", error);
         response.status(500).json({ error: "Ett fel inträffade vid inläggning i databasen." });

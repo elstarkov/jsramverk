@@ -1,9 +1,10 @@
 
 const database = require('../db/mongo_database.js');
+
 require('dotenv').config();
 
 const tickets = {
-    getTickets: async function getTickets(req, res){
+    getTickets: async function getTickets(req, res) {
         const db = await database.getDb();
 
         try {
@@ -17,7 +18,7 @@ const tickets = {
         }
     },
 
-    createTicket: async function createTicket(req, res){
+    createTicket: async function createTicket(req, res) {
         const db = await database.getDb();
 
         try {
@@ -27,7 +28,7 @@ const tickets = {
                 code: req.body.code,
                 trainnumber: req.body.trainnumber,
                 traindate: req.body.traindate,
-            }
+            };
 
             await db.collection.insertOne(doc);
 
