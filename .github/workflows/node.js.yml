@@ -14,9 +14,6 @@ jobs:
 
     runs-on: ubuntu-latest
 
-    env:
-      TEST_PORT: 3001
-
     strategy:
       matrix:
         node-version: [18.x]
