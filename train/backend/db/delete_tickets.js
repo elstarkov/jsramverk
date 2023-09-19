@@ -1,5 +1,6 @@
 
 const database = require('./mongo_database.js');
+
 require('dotenv').config();
 
 (async ()=> {
