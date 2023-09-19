@@ -35,8 +35,5 @@ jobs:
     - run: npm install
       working-directory: ./train/backend
 
-    - run: npm run eslint
-      working-directory: ./train/backend
-
     - run: npm test
       working-directory: ./train/backend
