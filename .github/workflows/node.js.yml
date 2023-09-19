@@ -14,9 +14,6 @@ jobs:
 
     runs-on: ubuntu-latest
 
-    env:
-      TEST_PORT: 3001
-
     strategy:
       matrix:
         node-version: [18.x]
@@ -34,6 +31,10 @@ jobs:
       uses: supercharge/mongodb-github-action@1.7.0
       with:
         mongodb-version: ${{ matrix.mongodb-version }}
+
+    - name: Start frontend
+      working-directory: ./train/frontend
+      run: npm install && npm start
 
     - run: npm install
       working-directory: ./train/backend
