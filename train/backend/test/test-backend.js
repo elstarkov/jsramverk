@@ -17,7 +17,7 @@ process.env.JSRAMVERK_DSN = dsn;
 
 const socketIO = require('socket.io-client');
 
-const port = 3000;
+const port = 8080;
 
 const database = require("../db/mongo_database.js");
 const fetchTrainPositions = require("../models/trains.js");
