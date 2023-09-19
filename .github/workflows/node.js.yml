@@ -32,10 +32,6 @@ jobs:
       with:
         mongodb-version: ${{ matrix.mongodb-version }}
 
-    - name: Start frontend
-      working-directory: ./train/frontend
-      run: npm install && npm start &
-
     - run: npm install
       working-directory: ./train/backend
 
