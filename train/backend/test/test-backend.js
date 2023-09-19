@@ -17,7 +17,7 @@ process.env.JSRAMVERK_DSN = dsn;
 
 const socketIO = require('socket.io-client');
 
-process.env.TEST_PORT = 3000;
+const port = process.env.TEST_PORT || 3000;
 
 const database = require("../db/mongo_database.js");
 const fetchTrainPositions = require("../models/trains.js");
@@ -115,8 +115,8 @@ describe('app', () => {
             let isDone = false;
 
             before(function(done) {
-                server.listen(process.env.TEST_PORT, () => {
-                    console.log(`Test server listening on port ${process.env.TEST_PORT}`);
+                server.listen(port, () => {
+                    console.log(`Test server listening on port ${port}`);
                     done();
                 });
             });
@@ -129,7 +129,7 @@ describe('app', () => {
             });
 
             beforeEach(function() {
-                client = socketIO(`http://127.0.0.1:${process.env.TEST_PORT}`, {
+                client = socketIO(`http://127.0.0.1:${port}`, {
                     transports: ['websocket'],
                     forceNew: true,
                 });
