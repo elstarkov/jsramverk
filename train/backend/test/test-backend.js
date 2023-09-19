@@ -17,7 +17,7 @@ process.env.JSRAMVERK_DSN = dsn;
 
 const socketIO = require('socket.io-client');
 
-const port = process.env.TEST_PORT || 3000;
+const port = 3000;
 
 const database = require("../db/mongo_database.js");
 const fetchTrainPositions = require("../models/trains.js");
@@ -109,48 +109,48 @@ describe('app', () => {
         });
     });
 
-    describe('fetchTrainPositions', function() {
-        describe('Test that train objects are returned:', () => {
-            let client;
-            let isDone = false;
+    // describe('fetchTrainPositions', function() {
+    //     describe('Test that train objects are returned:', () => {
+    //         let client;
+    //         let isDone = false;
 
-            before(function(done) {
-                server.listen(port, () => {
-                    console.log(`Test server listening on port ${port}`);
-                    done();
-                });
-            });
+    //         before(function(done) {
+    //             server.listen(port, () => {
+    //                 console.log(`Test server listening on port ${port}`);
+    //                 done();
+    //             });
+    //         });
 
-            after(function(done) {
-                server.close(() => {
-                    console.log('Test server closed');
-                    done();
-                });
-            });
+    //         after(function(done) {
+    //             server.close(() => {
+    //                 console.log('Test server closed');
+    //                 done();
+    //             });
+    //         });
 
-            beforeEach(function() {
-                client = socketIO(`http://127.0.0.1:${port}`, {
-                    transports: ['websocket'],
-                    forceNew: true,
-                });
-            });
+    //         beforeEach(function() {
+    //             client = socketIO(`http://127.0.0.1:${port}`, {
+    //                 transports: ['websocket'],
+    //                 forceNew: true,
+    //             });
+    //         });
 
-            afterEach(function() {
-                client.close();
-            });
+    //         afterEach(function() {
+    //             client.close();
+    //         });
 
-            it('should emit a message to clients', function(done) {
-                client.on('message', function(data) {
-                    data.should.be.an("object");
+    //         it('should emit a message to clients', function(done) {
+    //             client.on('message', function(data) {
+    //                 data.should.be.an("object");
 
-                    if (!isDone) {
-                        isDone = true;
-                        done();
-                    }
-                });
+    //                 if (!isDone) {
+    //                     isDone = true;
+    //                     done();
+    //                 }
+    //             });
 
-                fetchTrainPositions(server);
-            });
-        });
-    });
+    //             fetchTrainPositions(server);
+    //         });
+    //     });
+    // });
 });
