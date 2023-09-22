@@ -5,6 +5,7 @@
   "main": "app.js",
   "scripts": {
     "test": "nyc --reporter=html --reporter=text --reporter=clover mocha --exit --timeout 10000",
+    "posttest": "npm run eslint",
     "start": "nodemon app.js",
     "eslint": "eslint ."
   },
