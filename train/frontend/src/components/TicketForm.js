@@ -6,6 +6,15 @@ function TicketForm(props) {
     const [codes, setCodes] = useState([]);
     const [currentCode, setCurrentCode] = useState('');
 
+    useEffect(() => {
+        async function fetchData() {
+            const fetchedData = await api.getCodes();
+            setCodes(fetchedData);
+		}
+
+        fetchData();
+    }, []);
+
     const handleSubmit = async (e) => {
         e.preventDefault();
 
@@ -28,17 +37,8 @@ function TicketForm(props) {
         }
     };
 
-    useEffect(() => {
-        async function fetchData() {
-            const fetchedData = await api.getCodes();
-            setCodes(fetchedData);
-		}
-
-        fetchData();
-    }, []);
-
     return (
-        <form onSubmit={handleSubmit}>
+        <form data-testid="TicketForm" onSubmit={handleSubmit}>
             <label className='input-label'>Orsakskod</label>
             <select className='input' value={currentCode} onChange={(e) => setCurrentCode(e.target.value)}>
                 <option value="">Välj orsakskod</option>
