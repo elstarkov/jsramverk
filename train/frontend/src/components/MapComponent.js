@@ -7,7 +7,6 @@ import { apiUrl } from '../api';
 
 function MapComponent() {
     const [markers, setMarkers] = useState({});
-    const position = [62.173276, 14.942265];
     const mapRef = useRef(null);
 
     useEffect(() => {
@@ -47,8 +46,8 @@ function MapComponent() {
     }, [markers]);
 
     return (
-        <div id="map">
-            <MapContainer center={position} zoom={5} ref={mapRef}>
+        <div data-testid="MapCon" id="map">
+            <MapContainer center={[62.173276, 14.942265]} zoom={5} ref={mapRef}>
                 <TileLayer
                     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"

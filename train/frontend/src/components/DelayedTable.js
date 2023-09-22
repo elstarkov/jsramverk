@@ -17,7 +17,7 @@ function DelayedTable() {
     }, []);
 
     return (
-        <div className="delayed">
+        <div className="delayed" data-testid="DelayedTable">
             <h1>Försenade tåg</h1>
             <div className="delayed-trains">
                 <h3>Tågnummer</h3>
@@ -25,7 +25,7 @@ function DelayedTable() {
                 <h3>Försening</h3>
             </div>
             {data.map((item) => (
-                <div key={item.ActivityId} className="delayed-trains-container">
+                <div key={item.ActivityId} data-testid={item.ActivityId} className="delayed-trains-container">
                     <Link to="/Ticket" className="delayed-trains" state={{ data: item }}>
                         <div className="train-number">{item.OperationalTrainNumber}</div>
                         <div className="current-station">

@@ -26,7 +26,7 @@ function TicketPage() {
 
 	return (
 	<>
-		<div className='ticket-container'>
+		<div className='ticket-container' data-testid="TicketPage">
 			<h4><Link to="/">Tillbaka</Link></h4>
 			<h1>Nytt ärende #{tickets.length + 1}</h1>
 			{trainData.FromLocation ?
