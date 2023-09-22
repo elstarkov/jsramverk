@@ -37,3 +37,9 @@ jobs:
 
     - run: npm test
       working-directory: ./train/backend
+
+    - run: npm install
+      working-directory: ./train/frontend
+    
+    - run: npm test
+      working-directory: ./train/frontend
