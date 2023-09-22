@@ -17,8 +17,6 @@ process.env.JSRAMVERK_DSN = dsn;
 
 const socketIO = require('socket.io-client');
 
-const port = 3000;
-
 const database = require("../db/mongo_database.js");
 const fetchTrainPositions = require("../models/trains.js");
 
@@ -109,48 +107,34 @@ describe('app', () => {
         });
     });
 
-    // describe('fetchTrainPositions', function() {
-    //     describe('Test that train objects are returned:', () => {
-    //         let client;
-    //         let isDone = false;
+    describe('fetchTrainPositions', function() {
+        describe('Test that train objects are returned:', () => {
+            let client;
+            let isDone = false;
 
-    //         before(function(done) {
-    //             server.listen(port, () => {
-    //                 console.log(`Test server listening on port ${port}`);
-    //                 done();
-    //             });
-    //         });
+            beforeEach(function() {
+                client = socketIO("https://jsramverk-editor-sawr22.azurewebsites.net/", {
+                    transports: ['websocket'],
+                    forceNew: true,
+                });
+            });
 
-    //         after(function(done) {
-    //             server.close(() => {
-    //                 console.log('Test server closed');
-    //                 done();
-    //             });
-    //         });
+            afterEach(function() {
+                client.close();
+            });
 
-    //         beforeEach(function() {
-    //             client = socketIO(`http://127.0.0.1:${port}`, {
-    //                 transports: ['websocket'],
-    //                 forceNew: true,
-    //             });
-    //         });
+            it('should emit a message to clients', function(done) {
+                client.on('message', function(data) {
+                    data.should.be.an("object");
 
-    //         afterEach(function() {
-    //             client.close();
-    //         });
+                    if (!isDone) {
+                        isDone = true;
+                        done();
+                    }
+                });
 
-    //         it('should emit a message to clients', function(done) {
-    //             client.on('message', function(data) {
-    //                 data.should.be.an("object");
-
-    //                 if (!isDone) {
-    //                     isDone = true;
-    //                     done();
-    //                 }
-    //             });
-
-    //             fetchTrainPositions(server);
-    //         });
-    //     });
-    // });
+                fetchTrainPositions("https://jsramverk-editor-sawr22.azurewebsites.net/");
+            });
+        });
+    });
 });
