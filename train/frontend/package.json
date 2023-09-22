@@ -2,6 +2,8 @@
   "name": "frontend",
   "version": "0.1.0",
   "private": true,
+  "homepage": ".",
+  "proxy": "https://www.student.bth.se/~sawr22/editor/",
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
@@ -21,6 +23,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --transformIgnorePatterns \"node_modules/(?!@react-leaflet|react-leaflet)/\"",
+    "deploy": "npm run build && rsync -av --delete build/ sawr22@ssh.student.bth.se:www/editor",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
