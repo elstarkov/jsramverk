@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import api from '../api';
 import './TicketForm.css';
+import PropTypes from 'prop-types';
 
 function TicketForm(props) {
     const [codes, setCodes] = useState([]);
@@ -10,7 +11,7 @@ function TicketForm(props) {
         async function fetchData() {
             const fetchedData = await api.getCodes();
             setCodes(fetchedData);
-		}
+        }
 
         fetchData();
     }, []);
@@ -18,14 +19,13 @@ function TicketForm(props) {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        if (currentCode === "") {
-            alert("Välj en orsakskod.");
+        if (currentCode === '') {
+            alert('Välj en orsakskod.');
         } else {
-
             let newTicket = {
                 code: currentCode,
                 trainnumber: props.data.OperationalTrainNumber,
-                traindate: props.data.EstimatedTimeAtLocation.substring(0, 10),
+                traindate: props.data.EstimatedTimeAtLocation.substring(0, 10)
             };
 
             const res = await api.createTicket(newTicket);
@@ -39,8 +39,14 @@ function TicketForm(props) {
 
     return (
         <form data-testid="TicketForm" onSubmit={handleSubmit}>
-            <label className='input-label'>Orsakskod</label>
-            <select className='input' value={currentCode} onChange={(e) => setCurrentCode(e.target.value)}>
+            <label className="input-label" htmlFor="TicketSelect">
+                Orsakskod
+            </label>
+            <select
+                className="input"
+                id="TicketSelect"
+                value={currentCode}
+                onChange={(e) => setCurrentCode(e.target.value)}>
                 <option value="">Välj orsakskod</option>
                 {codes.map((code) => (
                     <option key={code.Code} value={code.Code}>
@@ -48,9 +54,17 @@ function TicketForm(props) {
                     </option>
                 ))}
             </select>
-            <button className='form-btn'>Skapa ärende</button>
+            <button className="form-btn">Skapa ärende</button>
         </form>
     );
 }
+
+TicketForm.propTypes = {
+    data: PropTypes.shape({
+        OperationalTrainNumber: PropTypes.string,
+        EstimatedTimeAtLocation: PropTypes.string
+    }),
+    handleTicketList: PropTypes.func
+};
 
 export default TicketForm;

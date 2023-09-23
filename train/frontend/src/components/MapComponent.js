@@ -12,13 +12,13 @@ function MapComponent() {
     useEffect(() => {
         const socket = io(`${apiUrl}`);
 
-        socket.on("message", (data) => {
+        socket.on('message', (data) => {
             setMarkers((prevMarkers) => ({
                 ...prevMarkers,
                 [data.trainnumber]: {
                     position: data.position,
-                    trainnumber: data.trainnumber,
-                },
+                    trainnumber: data.trainnumber
+                }
             }));
         });
 
@@ -36,7 +36,7 @@ function MapComponent() {
             });
 
             for (const trains in markers) {
-                if (markers.hasOwnProperty(trains)) {
+                if (trains in markers) {
                     const markerData = markers[trains];
                     const marker = L.marker(markerData.position).bindPopup(markerData.trainnumber);
                     mapRef.current.addLayer(marker);

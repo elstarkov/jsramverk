@@ -1,10 +1,10 @@
-import AppRouter from "./Router";
+import AppRouter from './Router';
 
 function App() {
-  return (
-    //Add navbar here later
-    <AppRouter />
-  );
+    return (
+        //Add navbar here later
+        <AppRouter />
+    );
 }
 
 export default App;

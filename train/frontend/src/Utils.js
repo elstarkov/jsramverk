@@ -4,7 +4,7 @@ function outputDelay(item) {
 
     const diff = Math.abs(est - adv);
 
-    return Math.floor(diff / (1000 * 60)) + " minuter"; //Överväg ta bort "minuter" kan läggas till fritt i html.
+    return Math.floor(diff / (1000 * 60)) + ' minuter'; //Överväg ta bort "minuter" kan läggas till fritt i html.
 }
 
 export default outputDelay;
