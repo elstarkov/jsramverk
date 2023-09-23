@@ -33,13 +33,14 @@ jobs:
         mongodb-version: ${{ matrix.mongodb-version }}
 
     - run: npm install
-      working-directory: ./train/backend
-
-    - run: npm test
-      working-directory: ./train/backend
-
-    - run: npm install
       working-directory: ./train/frontend
     
     - run: npm test
       working-directory: ./train/frontend
+
+    - run: npm install
+      working-directory: ./train/backend
+
+    - run: npm test
+      working-directory: ./train/backend
+    
