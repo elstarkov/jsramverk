@@ -60,8 +60,8 @@ describe('TicketForm Component', () => {
             const form = screen.getByTestId('TicketForm');
             expect(form).toContainHTML(
                 '<form data-testid="TicketForm">' +
-                    '<label class="input-label">Orsakskod</label>' +
-                    '<select class="input">' +
+                    '<label class="input-label" for="TicketSelect">Orsakskod</label>' +
+                    '<select class="input" id="TicketSelect">' +
                     '<option value="">Välj orsakskod</option>' +
                     '<option value="ANA002">ANA002 - Bakre tåg</option>' +
                     '<option value="ANA004">ANA004 - Brofel</option>' +
@@ -89,8 +89,8 @@ describe('TicketForm Component', () => {
 
             expect(form).toContainHTML(
                 '<form data-testid="TicketForm">' +
-                    '<label class="input-label">Orsakskod</label>' +
-                    '<select class="input">' +
+                    '<label class="input-label" for="TicketSelect">Orsakskod</label>' +
+                    '<select class="input" id="TicketSelect">' +
                     '<option value="">Välj orsakskod</option>' +
                     '<option value="ANA002">ANA002 - Bakre tåg</option>' +
                     '<option value="ANA004">ANA004 - Brofel</option>' +

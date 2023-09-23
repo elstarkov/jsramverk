@@ -39,12 +39,12 @@ function TicketForm(props) {
 
     return (
         <form data-testid="TicketForm" onSubmit={handleSubmit}>
-            <label htmlFor="TicketSelect" className="input-label">
+            <label className="input-label" htmlFor="TicketSelect">
                 Orsakskod
             </label>
             <select
-                id="TicketSelect"
                 className="input"
+                id="TicketSelect"
                 value={currentCode}
                 onChange={(e) => setCurrentCode(e.target.value)}>
                 <option value="">Välj orsakskod</option>
@@ -63,8 +63,8 @@ TicketForm.propTypes = {
     data: PropTypes.shape({
         OperationalTrainNumber: PropTypes.string,
         EstimatedTimeAtLocation: PropTypes.string
-    }).isRequired,
-    handleTicketList: PropTypes.func.isRequired
+    }),
+    handleTicketList: PropTypes.func
 };
 
 export default TicketForm;
