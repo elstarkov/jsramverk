@@ -36,7 +36,7 @@ function MapComponent() {
             });
 
             for (const trains in markers) {
-                if (trains in markers) {
+                if (Object.prototype.hasOwnProperty.call(markers, trains)) {
                     const markerData = markers[trains];
                     const marker = L.marker(markerData.position).bindPopup(markerData.trainnumber);
                     mapRef.current.addLayer(marker);

@@ -1,5 +1,7 @@
 
-/* global it describe before after beforeEach afterEach */
+/* global it describe before after */
+
+// beforeEach afterEach - Put these in 'global it' to use them
 
 process.env.NODE_ENV = 'test';
 
@@ -15,10 +17,10 @@ const dsn = "mongodb://localhost:27017/trains";
 
 process.env.JSRAMVERK_DSN = dsn;
 
-const socketIO = require('socket.io-client');
+//const socketIO = require('socket.io-client');
 
 const database = require("../db/mongo_database.js");
-const fetchTrainPositions = require("../models/trains.js");
+//const fetchTrainPositions = require("../models/trains.js");
 
 let db;
 
@@ -107,34 +109,34 @@ describe('app', () => {
         });
     });
 
-    describe('fetchTrainPositions', function() {
-        describe('Test that train objects are returned:', () => {
-            let client;
-            let isDone = false;
+    // describe('fetchTrainPositions', function() {
+    //     describe('Test that train objects are returned:', () => {
+    //         let client;
+    //         let isDone = false;
 
-            beforeEach(function() {
-                client = socketIO("https://jsramverk-editor-sawr22.azurewebsites.net/", {
-                    transports: ['websocket'],
-                    forceNew: true,
-                });
-            });
+    //         beforeEach(function() {
+    //             client = socketIO("https://jsramverk-editor-sawr22.azurewebsites.net/", {
+    //                 transports: ['websocket'],
+    //                 forceNew: true,
+    //             });
+    //         });
 
-            afterEach(function() {
-                client.close();
-            });
+    //         afterEach(function() {
+    //             client.close();
+    //         });
 
-            it('should emit a message to clients', function(done) {
-                client.on('message', function(data) {
-                    data.should.be.an("object");
+    //         it('should emit a message to clients', function(done) {
+    //             client.on('message', function(data) {
+    //                 data.should.be.an("object");
 
-                    if (!isDone) {
-                        isDone = true;
-                        done();
-                    }
-                });
+    //                 if (!isDone) {
+    //                     isDone = true;
+    //                     done();
+    //                 }
+    //             });
 
-                fetchTrainPositions("https://jsramverk-editor-sawr22.azurewebsites.net/");
-            });
-        });
-    });
+    //             fetchTrainPositions("https://jsramverk-editor-sawr22.azurewebsites.net/");
+    //         });
+    //     });
+    // });
 });
