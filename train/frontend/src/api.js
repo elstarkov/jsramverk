@@ -37,6 +37,18 @@ const api = {
         });
 
         return response;
+    },
+
+    updateTicket: async function (newTicketObj) {
+        const response = await fetch(`${apiUrl}/tickets`, {
+            body: JSON.stringify(newTicketObj),
+            headers: {
+                'content-type': 'application/json'
+            },
+            method: 'PUT'
+        });
+
+        return response;
     }
 };
 
