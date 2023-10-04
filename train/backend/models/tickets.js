@@ -43,6 +43,30 @@ const tickets = {
         } finally {
             await db.client.close();
         }
+    },
+
+    updateTicket: async function updateTicket(req, res) {
+        const db = await database.getDb();
+
+        try {
+            const filter = { my_id: req.body.my_id };
+
+            const updateDoc = {
+                $set: {
+                    code: req.body.code,
+                },
+            };
+
+            await db.collection.updateOne(filter, updateDoc);
+
+            res.json({ message: 'Uppdatering genomförd' });
+        } catch (error) {
+            console.error(error);
+            res.status(500).json({ message: 'Något gick fel' });
+
+        } finally {
+            await db.client.close();
+        }
     }
 };
 

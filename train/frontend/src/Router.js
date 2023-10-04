@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import DelayedPage from './views/DelayedPage';
-import TicketPage from './views/TicketPage';
+import Tickets from './views/Tickets';
 
 function getBaseName() {
     if (window.location.hostname === 'localhost' && window.location.port === '3000') {
@@ -17,7 +17,7 @@ function AppRouter() {
         <Router basename={basename}>
             <Routes>
                 <Route exact path="/" element={<DelayedPage />} />
-                <Route path="/Ticket" element={<TicketPage />} />
+                <Route path="/Ticket" element={<Tickets />} />
             </Routes>
         </Router>
     );

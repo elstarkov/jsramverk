@@ -1,6 +1,6 @@
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
-import TicketPage from '../TicketPage';
+import Tickets from '../Tickets';
 import api from '../../api';
 import { act } from 'react-dom/test-utils';
 
@@ -43,10 +43,10 @@ const mockedCodes = [
     }
 ];
 
-describe('TicketPage view', () => {
+describe('Tickets view', () => {
     beforeEach(() => jest.clearAllMocks());
 
-    it('should render the TicketPage', async () => {
+    it('should render the Tickets', async () => {
         api.getTickets.mockResolvedValue([
             {
                 code: 'ANA005',
@@ -62,7 +62,7 @@ describe('TicketPage view', () => {
         await act(async () => {
             render(
                 <MemoryRouter initialEntries={[{ pathname: '/Ticket', state: stateMock }]}>
-                    <TicketPage />
+                    <Tickets />
                 </MemoryRouter>
             );
         });
@@ -98,7 +98,7 @@ describe('TicketPage view', () => {
         await act(async () => {
             render(
                 <MemoryRouter initialEntries={[{ pathname: '/Ticket', state: stateMock }]}>
-                    <TicketPage />
+                    <Tickets />
                 </MemoryRouter>
             );
         });
