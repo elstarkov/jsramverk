@@ -63,7 +63,6 @@ const tickets = {
         } catch (error) {
             console.error(error);
             res.status(500).json({ message: 'Något gick fel' });
-
         } finally {
             await db.client.close();
         }
