@@ -40,7 +40,7 @@ function TicketPage() {
                 ) : (
                     ''
                 )}
-                <h4>Försenad: {outputDelay(trainData)}</h4>
+                <h4>Försenad: {outputDelay(trainData)} minuter</h4>
                 <TicketForm data={trainData} handleTicketList={handleTicketSubmit} />
                 <div>
                     <h2>Befintliga ärenden</h2>

@@ -13,7 +13,7 @@
 }
 
 .input-label::after {
-    content: ":";
+    content: ':';
 }
 
 .form-btn {
