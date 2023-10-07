@@ -1,31 +1,12 @@
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import { MapContainer, TileLayer } from 'react-leaflet';
+import PropTypes from 'prop-types';
 import './MapComponent.css';
-import io from 'socket.io-client';
 import L from 'leaflet';
-import { apiUrl } from '../api';
 
-function MapComponent() {
-    const [markers, setMarkers] = useState({});
+function MapComponent(props) {
     const mapRef = useRef(null);
-
-    useEffect(() => {
-        const socket = io(`${apiUrl}`);
-
-        socket.on('message', (data) => {
-            setMarkers((prevMarkers) => ({
-                ...prevMarkers,
-                [data.trainnumber]: {
-                    position: data.position,
-                    trainnumber: data.trainnumber
-                }
-            }));
-        });
-
-        return () => {
-            socket.disconnect();
-        };
-    }, []);
+    const markers = props.data;
 
     useEffect(() => {
         if (mapRef.current) {
@@ -38,7 +19,19 @@ function MapComponent() {
             for (const trains in markers) {
                 if (Object.prototype.hasOwnProperty.call(markers, trains)) {
                     const markerData = markers[trains];
-                    const marker = L.marker(markerData.position).bindPopup(markerData.trainnumber);
+                    const marker = L.marker(markerData.position, {
+                        value: markerData.trainnumber
+                    })
+                        .bindPopup(markerData.trainnumber)
+                        .on('click', (e) => {
+                            props.handleFilter(e.target.options.value);
+                        })
+                        .on('mouseover', function () {
+                            this.openPopup();
+                        })
+                        .on('mouseout', function () {
+                            this.closePopup();
+                        });
                     mapRef.current.addLayer(marker);
                 }
             }
@@ -56,5 +49,10 @@ function MapComponent() {
         </div>
     );
 }
+
+MapComponent.propTypes = {
+    data: PropTypes.object.isRequired,
+    handleFilter: PropTypes.func
+};
 
 export default MapComponent;

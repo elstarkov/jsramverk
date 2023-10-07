@@ -19,7 +19,7 @@ describe('Map Component', () => {
 
         render(
             <Router>
-                <MapComponent />
+                <MapComponent data={{ 22: { position: [60, 15], trainnumber: 22 } }} />
             </Router>
         );
 

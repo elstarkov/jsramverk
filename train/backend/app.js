@@ -5,7 +5,7 @@ const cors = require('cors');
 //const morgan = require('morgan');
 const bodyParser = require('body-parser');
 
-const fetchTrainPositions = require('./models/trains.js');
+const trains = require('./models/trains.js');
 const delayed = require('./routes/delayed.js');
 const tickets = require('./routes/tickets.js');
 const codes = require('./routes/codes.js');
@@ -48,4 +48,4 @@ const server = httpServer.listen(port, () => {
 
 module.exports = server;
 
-fetchTrainPositions(io);
+trains.fetchDelayedTrainsPosition(io);
