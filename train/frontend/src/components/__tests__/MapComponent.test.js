@@ -17,19 +17,11 @@
 
 //         io.mockReturnValue(mockSocket);
 
-<<<<<<< HEAD
 //         render(
 //             <Router>
 //                 <MapComponent />
 //             </Router>
 //         );
-=======
-        render(
-            <Router>
-                <MapComponent data={{ 22: { position: [60, 15], trainnumber: 22 } }} />
-            </Router>
-        );
->>>>>>> main
 
 //         const mapContainer = screen.getByTestId('MapCon');
 //         const leafletMap = mapContainer.getElementsByClassName('leaflet-container')[0];
