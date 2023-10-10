@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import outputDelay from '../Utils';
 import api from '../api';
@@ -6,15 +7,17 @@ import './DelayedTable.css';
 
 function DelayedTable() {
     const [data, setData] = useState([]);
+    const location = useLocation();
+    const token = location.state.token;
 
     useEffect(() => {
         async function fetchData() {
-            const fetchedData = await api.getDelayed();
+            const fetchedData = await api.getDelayed(token);
             setData(fetchedData);
         }
 
         fetchData();
-    }, []);
+    }, [token]);
 
     return (
         <div className="delayed" data-testid="DelayedTable">
@@ -29,7 +32,13 @@ function DelayedTable() {
                     key={item.ActivityId}
                     data-testid={item.ActivityId}
                     className="delayed-trains-container">
-                    <Link to="/Ticket" className="delayed-trains" state={{ data: item }}>
+                    <Link
+                        to="/Ticket"
+                        className="delayed-trains"
+                        state={{
+                            data: item,
+                            token: token
+                        }}>
                         <div className="train-number">{item.OperationalTrainNumber}</div>
                         <div className="current-station">
                             <div>{item.LocationSignature}</div>

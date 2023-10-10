@@ -1,0 +1,72 @@
+
+.container {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+.login-form {
+  padding: 40px;
+  border: 1px solid black;
+  color: rgb(20, 20, 20);
+  position: relative;
+  left: 42%;
+  max-width: 15%;
+  margin-top: 40vh;
+}
+
+.login-btn {
+  display: inline-block;
+  margin-top: 25px;
+  margin-left: 25px;
+  font-weight: 600;
+  text-align: center;
+  background-color: #009fff;
+  color: #fff;
+  border-radius: 5px;
+  border: 1px solid black;
+  padding: 0.8rem 1rem;
+}
+
+.login-btn:hover {
+  cursor: pointer;
+  opacity: 0.5;
+}
+
+.input {
+  font-size: 1.1rem;
+  display: block;
+  border-radius: 0.2rem;
+  padding: 0.2rem;
+  margin-bottom: 0.25rem;
+}
+
+.input-label {
+  font-weight: 600;
+  margin: 1.2rem 0 0;
+  display: block;
+}
+
+.input-label::after {
+  content: ":";
+}
+
+.reg-btn {
+  display: inline-block;
+  position: relative;
+  left: 53%;
+  top: -83px;
+  font-weight: 600;
+  text-align: center;
+  background-color: #5a5a5a;
+  color: #fff;
+  border-radius: 5px;
+  border: 1px solid black;
+  padding: 0.8rem 1rem;
+}
+
+.reg-btn:hover {
+  cursor: pointer;
+  opacity: 0.5;
+}

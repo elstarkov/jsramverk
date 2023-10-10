@@ -9,20 +9,34 @@ console.log(`Now using '${useLocalBackend}' env`);
 export const apiUrl = useLocalBackend === 'test' ? localApiUrl : remoteApiUrl;
 
 const api = {
-    getTickets: async function () {
-        const resp = await fetch(`${apiUrl}/tickets`);
+    getTickets: async function (token) {
+        const resp = await fetch(`${apiUrl}/tickets`, {
+            headers: {
+                'x-access-token': token
+            }
+        });
         const res = await resp.json();
         return res.data;
     },
 
-    getCodes: async function () {
-        const resp = await fetch(`${apiUrl}/codes`);
+    getCodes: async function (token) {
+        const resp = await fetch(`${apiUrl}/codes`, {
+            headers: {
+                'x-access-token': token
+            }
+        });
+
         const res = await resp.json();
         return res.data;
     },
 
-    getDelayed: async function () {
-        const resp = await fetch(`${apiUrl}/delayed`);
+    getDelayed: async function (token) {
+        const resp = await fetch(`${apiUrl}/delayed`, {
+            headers: {
+                'x-access-token': token
+            }
+        });
+
         const res = await resp.json();
         return res.data;
     },
@@ -46,6 +60,30 @@ const api = {
                 'content-type': 'application/json'
             },
             method: 'PUT'
+        });
+
+        return response;
+    },
+
+    register: async function (newUser) {
+        const response = await fetch(`${apiUrl}/register`, {
+            body: JSON.stringify(newUser),
+            headers: {
+                'content-type': 'application/json'
+            },
+            method: 'POST'
+        });
+
+        return response;
+    },
+
+    login: async function (user) {
+        const response = await fetch(`${apiUrl}/login`, {
+            body: JSON.stringify(user),
+            headers: {
+                'content-type': 'application/json'
+            },
+            method: 'POST'
         });
 
         return response;

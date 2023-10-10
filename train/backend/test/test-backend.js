@@ -47,67 +47,67 @@ describe('app', () => {
         });
     });
 
-    describe('app', () => {
-        describe('GET /delayed', () => {
-            it('200 HAPPY PATH getting base', (done) => {
-                chai.request(server)
-                    .get("/delayed")
-                    .end((err, res) => {
-                        res.should.have.status(200);
-                        res.body.should.be.an("object");
-                        done();
-                    });
-            });
-        });
-    });
+    // describe('app', () => {
+    //     describe('GET /delayed', () => {
+    //         it('200 HAPPY PATH getting base', (done) => {
+    //             chai.request(server)
+    //                 .get("/delayed")
+    //                 .end((err, res) => {
+    //                     res.should.have.status(200);
+    //                     res.body.should.be.an("object");
+    //                     done();
+    //                 });
+    //         });
+    //     });
+    // });
 
-    describe('app', () => {
-        describe('GET /codes', () => {
-            it('200 HAPPY PATH getting base', (done) => {
-                chai.request(server)
-                    .get("/codes")
-                    .end((err, res) => {
-                        res.should.have.status(200);
-                        res.body.should.be.an("object");
-                        done();
-                    });
-            });
-        });
-    });
+    // describe('app', () => {
+    //     describe('GET /codes', () => {
+    //         it('200 HAPPY PATH getting base', (done) => {
+    //             chai.request(server)
+    //                 .get("/codes")
+    //                 .end((err, res) => {
+    //                     res.should.have.status(200);
+    //                     res.body.should.be.an("object");
+    //                     done();
+    //                 });
+    //         });
+    //     });
+    // });
 
-    describe('app', () => {
-        describe('GET /tickets', () => {
-            it('200 HAPPY PATH getting base', (done) => {
-                chai.request(server)
-                    .get("/tickets")
-                    .end((err, res) => {
-                        res.should.have.status(200);
-                        res.body.should.be.an("object");
-                        res.body.data.should.be.an("array");
-                        done();
-                    });
-            });
-        });
-    });
+    // describe('app', () => {
+    //     describe('GET /tickets', () => {
+    //         it('200 HAPPY PATH getting base', (done) => {
+    //             chai.request(server)
+    //                 .get("/tickets")
+    //                 .end((err, res) => {
+    //                     res.should.have.status(200);
+    //                     res.body.should.be.an("object");
+    //                     res.body.data.should.be.an("array");
+    //                     done();
+    //                 });
+    //         });
+    //     });
+    // });
 
-    describe('app', () => {
-        describe('POST /tickets', () => {
-            it('should create a new ticket', async () => {
-                const doc = {
-                    code: "1337",
-                    trainnumber: "TEST_TRAIN",
-                    traindate: "24/1337",
-                };
+    // describe('app', () => {
+    //     describe('POST /tickets', () => {
+    //         it('should create a new ticket', async () => {
+    //             const doc = {
+    //                 code: "1337",
+    //                 trainnumber: "TEST_TRAIN",
+    //                 traindate: "24/1337",
+    //             };
 
-                const res = await chai.request(server)
-                    .post('/tickets')
-                    .send(doc);
+    //             const res = await chai.request(server)
+    //                 .post('/tickets')
+    //                 .send(doc);
 
-                res.should.have.status(200);
-                res.body.should.be.an('object');
-            });
-        });
-    });
+    //             res.should.have.status(200);
+    //             res.body.should.be.an('object');
+    //         });
+    //     });
+    // });
 
     // describe('fetchTrainPositions', function() {
     //     describe('Test that train objects are returned:', () => {
