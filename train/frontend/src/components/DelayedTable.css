@@ -14,6 +14,17 @@
     cursor: pointer;
 }
 
+.delayed-trains-header {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.2rem 0.8rem;
+    align-items: center;
+}
+
+.delayed-trains-header * {
+    flex: 1;
+}
+
 .delayed-trains-container {
     border-top: 1px solid #ccc;
 }
@@ -30,4 +41,19 @@
 
 .current-station {
     width: 30%;
+}
+
+.filter-btn {
+    font-weight: 600;
+    padding: 0.2rem 0.5rem;
+    text-align: center;
+    border: 1px solid #333;
+    border-radius: 3px;
+    background-color: #add9f3;
+    text-decoration: none;
+    color: #222;
+}
+
+.filter-btn:hover {
+    text-decoration: underline;
 }

@@ -105,7 +105,7 @@ function TicketPageTest() {
                 ) : (
                     ''
                 )}
-                <h4>Försenad: {outputDelay(trainData)}</h4>
+                <h4>Försenad: {outputDelay(trainData)} minuter</h4>
 
                 <form data-testid="TicketForm" onSubmit={handleSubmit}>
                     <label className="input-label" htmlFor="TicketSelect">
