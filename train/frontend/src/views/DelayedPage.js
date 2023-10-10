@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import DelayedTable from '../components/DelayedTable';
 import MapComponent from '../components/MapComponent';
 import io from 'socket.io-client';
@@ -12,12 +13,15 @@ function DelayedPage() {
     const [markers, setMarkers] = useState({});
     const [rows, setRows] = useState({});
 
+    const location = useLocation();
+    const token = location.state.token;
+
     useEffect(() => {
         async function fetchData() {
             setMarkers({});
             setRows({});
 
-            const fetchedData = await api.getDelayed();
+            const fetchedData = await api.getDelayed(token);
             const uniqueObjects = {};
 
             if (filter !== null) {

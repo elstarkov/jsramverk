@@ -26,7 +26,7 @@ function Login() {
                 alert('Fel användarnamn eller lösenord!');
             } else {
                 const data = await res.json();
-                console.log(data.data.token);
+                //console.log(data.data.token);
                 const token = data.data.token;
                 navigate('/Delayed', { state: { token } });
             }
