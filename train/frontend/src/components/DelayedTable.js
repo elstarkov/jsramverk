@@ -1,10 +1,31 @@
+<<<<<<< HEAD
+import { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
+=======
+>>>>>>> main
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import outputDelay from '../Utils';
 import './DelayedTable.css';
 
+<<<<<<< HEAD
+function DelayedTable() {
+    const [data, setData] = useState([]);
+    const location = useLocation();
+    const token = location.state.token;
+
+    useEffect(() => {
+        async function fetchData() {
+            const fetchedData = await api.getDelayed(token);
+            setData(fetchedData);
+        }
+
+        fetchData();
+    }, [token]);
+=======
 function DelayedTable(props) {
     const data = props.data;
+>>>>>>> main
 
     return (
         <div className="delayed" data-testid="DelayedTable">
@@ -18,6 +39,25 @@ function DelayedTable(props) {
                 <div
                     key={item.ActivityId}
                     data-testid={item.ActivityId}
+<<<<<<< HEAD
+                    className="delayed-trains-container">
+                    <Link
+                        to="/Ticket"
+                        className="delayed-trains"
+                        state={{
+                            data: item,
+                            token: token
+                        }}>
+                        <div className="train-number">{item.OperationalTrainNumber}</div>
+                        <div className="current-station">
+                            <div>{item.LocationSignature}</div>
+                            <div>
+                                {item.FromLocation
+                                    ? `${item.FromLocation[0].LocationName} -> `
+                                    : ''}{' '}
+                                {item.ToLocation ? item.ToLocation[0].LocationName : ''}
+                            </div>
+=======
                     value={item.OperationalTrainNumber}
                     onClick={() => props.handleFilter(item.OperationalTrainNumber)}
                     className="delayed-trains-container delayed-trains">
@@ -27,6 +67,7 @@ function DelayedTable(props) {
                         <div>
                             {item.FromLocation ? `${item.FromLocation[0].LocationName} -> ` : ''}{' '}
                             {item.ToLocation ? item.ToLocation[0].LocationName : ''}
+>>>>>>> main
                         </div>
                     </div>
                     <div className="delay">{outputDelay(item)} minuter</div>

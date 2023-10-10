@@ -10,6 +10,9 @@ function TicketPageTest() {
     const trainData = state.data;
     const [tickets, setTickets] = useState([]);
 
+    const location = useLocation();
+    const token = location.state.token;
+
     const [codes, setCodes] = useState([]);
     const [currentCode, setCurrentCode] = useState('');
     const [newCode, setNewCode] = useState('');
@@ -17,12 +20,12 @@ function TicketPageTest() {
 
     useEffect(() => {
         async function fetchTickets() {
-            const theTickets = await api.getTickets();
+            const theTickets = await api.getTickets(token);
             setTickets(theTickets);
         }
 
         async function fetchCodes() {
-            const fetchedCodes = await api.getCodes();
+            const fetchedCodes = await api.getCodes(token);
             setCodes(fetchedCodes);
         }
 
@@ -52,7 +55,7 @@ function TicketPageTest() {
 
             if (res.status < 300) {
                 setCurrentCode('');
-                const theTickets = await api.getTickets();
+                const theTickets = await api.getTickets(token);
                 setTickets(theTickets);
             }
         }
@@ -73,7 +76,7 @@ function TicketPageTest() {
 
             if (res.status < 300) {
                 setOpenTicketId('');
-                const theTickets = await api.getTickets();
+                const theTickets = await api.getTickets(token);
                 setTickets(theTickets);
                 setNewCode('');
             }
@@ -84,7 +87,13 @@ function TicketPageTest() {
         <>
             <div className="ticket-container" data-testid="TicketPage">
                 <h4>
-                    <Link to="/">Tillbaka</Link>
+                    <Link
+                        to="/Delayed"
+                        state={{
+                            token: token
+                        }}>
+                        Tillbaka
+                    </Link>
                 </h4>
                 <h1>Nytt ärende #{tickets.length + 1}</h1>
                 {trainData.FromLocation ? (
