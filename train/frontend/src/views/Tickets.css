@@ -3,6 +3,11 @@
   padding: 2rem;
 }
 
+button:disabled {
+  background-color: darkslategray;
+  color: white;
+}
+
 .approve-btn {
   font-weight: 600;
   text-align: center;

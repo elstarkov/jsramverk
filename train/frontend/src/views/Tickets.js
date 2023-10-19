@@ -1,14 +1,18 @@
 import { useEffect, useState } from 'react';
 import { useLocation, Link } from 'react-router-dom';
+import io from 'socket.io-client';
 import outputDelay from '../Utils';
 import api from '../api';
+import { apiUrl } from '../api';
 
 import './Tickets.css';
 
-function TicketPageTest() {
+function TicketPage() {
     let { state } = useLocation();
     const trainData = state.data;
+    const [socket, setSocket] = useState(null);
     const [tickets, setTickets] = useState([]);
+    const [owner, setOwner] = useState(false);
 
     const location = useLocation();
     const token = location.state.token;
@@ -19,22 +23,60 @@ function TicketPageTest() {
     const [openTicketId, setOpenTicketId] = useState('');
 
     useEffect(() => {
-        async function fetchTickets() {
-            const theTickets = await api.getTickets(token);
-            setTickets(theTickets);
-        }
-
         async function fetchCodes() {
             const fetchedCodes = await api.getCodes(token);
             setCodes(fetchedCodes);
         }
 
-        fetchTickets();
         fetchCodes();
+
+        const trainSocket = io(`${apiUrl}/LockedTrains`);
+
+        trainSocket.emit('lockTrain', trainData.OperationalTrainNumber);
+        console.log(trainData.OperationalTrainNumber);
+
+        trainSocket.on('trains', (data) => {
+            if (data[trainData.OperationalTrainNumber][0] === trainSocket.id) {
+                setOwner(true);
+            }
+        });
+
+        const handleTrainUnload = () => {
+            trainSocket.emit('unlockTrain', trainData.OperationalTrainNumber);
+        };
+
+        window.addEventListener('beforeunload', handleTrainUnload);
+
+        return () => {
+            trainSocket.emit('unlockTrain', trainData.OperationalTrainNumber);
+            window.removeEventListener('beforeunload', handleTrainUnload);
+            trainSocket.disconnect();
+        };
     }, []);
 
-    const handleUpdate = async (ticketId) => {
-        console.log(ticketId);
+    useEffect(() => {
+        const socket = io(`${apiUrl}/Tickets`);
+        setSocket(socket);
+
+        socket.on('tickets', (data) => {
+            setTickets(data);
+        });
+
+        const handleTicketUnload = () => {
+            socket.emit('unlocked', openTicketId);
+        };
+
+        window.addEventListener('beforeunload', handleTicketUnload);
+
+        return () => {
+            socket.emit('unlocked', openTicketId);
+            window.removeEventListener('beforeunload', handleTicketUnload);
+            socket.disconnect();
+        };
+    }, [openTicketId]);
+
+    const handleUpdate = (ticketId) => {
+        socket.emit('locked', ticketId);
         setOpenTicketId(ticketId);
     };
 
@@ -50,14 +92,8 @@ function TicketPageTest() {
                 traindate: trainData.EstimatedTimeAtLocation.substring(0, 10)
             };
 
-            const res = await api.createTicket(newTicket);
-            console.log(newTicket);
-
-            if (res.status < 300) {
-                setCurrentCode('');
-                const theTickets = await api.getTickets(token);
-                setTickets(theTickets);
-            }
+            socket.emit('create', newTicket);
+            setCurrentCode('');
         }
     };
 
@@ -72,14 +108,15 @@ function TicketPageTest() {
                 code: newCode
             };
 
-            const res = await api.updateTicket(editedTicket);
+            socket.emit('update', editedTicket);
 
-            if (res.status < 300) {
-                setOpenTicketId('');
-                const theTickets = await api.getTickets(token);
-                setTickets(theTickets);
-                setNewCode('');
-            }
+            socket.on('updated', (res) => {
+                if (res === 'OK') {
+                    socket.emit('unlocked', openTicketId);
+                    setOpenTicketId('');
+                    setNewCode('');
+                }
+            });
         }
     };
 
@@ -123,7 +160,9 @@ function TicketPageTest() {
                             </option>
                         ))}
                     </select>
-                    <button className="form-btn">Skapa ärende</button>
+                    <button disabled={owner ? false : true} className="update-btn">
+                        Skapa ärende
+                    </button>
                 </form>
 
                 <div>
@@ -132,6 +171,7 @@ function TicketPageTest() {
                         <div key={ticket.my_id}>
                             <p>
                                 <button
+                                    disabled={ticket.locked ? true : false}
                                     className="update-btn"
                                     onClick={() => handleUpdate(ticket.my_id)}>
                                     Uppdatera
@@ -173,4 +213,4 @@ function TicketPageTest() {
     );
 }
 
-export default TicketPageTest;
+export default TicketPage;

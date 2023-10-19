@@ -5,7 +5,8 @@ const cors = require('cors');
 //const morgan = require('morgan');
 const bodyParser = require('body-parser');
 
-const trains = require('./models/trains.js');
+const trainsModel = require('./models/trains.js');
+const ticketsModel = require('./models/tickets.js');
 const delayed = require('./routes/delayed.js');
 const tickets = require('./routes/tickets.js');
 const codes = require('./routes/codes.js');
@@ -33,6 +34,10 @@ const io = require("socket.io")(httpServer, {
     }
 });
 
+const delayedNamespace = io.of('/Delayed');
+const ticketNamespace = io.of('/Tickets');
+const lockedTrainsNamespace = io.of('/LockedTrains');
+
 app.get('/', (req, res) => {
     res.json({
         data: 'Hello World!',
@@ -55,4 +60,6 @@ const server = httpServer.listen(port, () => {
 
 module.exports = server;
 
-trains.fetchDelayedTrainsPosition(io);
+trainsModel.fetchDelayedTrainsPosition(delayedNamespace);
+trainsModel.manageTrainLock(lockedTrainsNamespace);
+ticketsModel.manageTickets(ticketNamespace);

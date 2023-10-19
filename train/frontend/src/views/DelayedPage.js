@@ -41,7 +41,7 @@ function DelayedPage() {
     }, [filter]);
 
     useEffect(() => {
-        const socket = io(`${apiUrl}`);
+        const socket = io(`${apiUrl}/Delayed`);
 
         socket.on('message', (data) => {
             if (delayedTrains[data.trainnumber]) {
