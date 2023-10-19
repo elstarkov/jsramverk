@@ -33,7 +33,6 @@ function TicketPage() {
         const trainSocket = io(`${apiUrl}/LockedTrains`);
 
         trainSocket.emit('lockTrain', trainData.OperationalTrainNumber);
-        console.log(trainData.OperationalTrainNumber);
 
         trainSocket.on('trains', (data) => {
             if (data[trainData.OperationalTrainNumber][0] === trainSocket.id) {
