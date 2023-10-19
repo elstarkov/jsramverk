@@ -207,7 +207,7 @@ const trains = {
             });
 
             socket.on('lockTrain', (id) => {
-                if (id in trains) { //Try "id in trains" to make this validate in eslint.
+                if (id in trains) {
                     trains[id].push(socket.id);
                 } else {
                     trains[id] = [socket.id];
