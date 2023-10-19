@@ -80,8 +80,8 @@ const trains = {
             console.log("EventSource failed.");
         };
     },
-    fetchDelayedTrainsPosition: async function fetchDelayedTrainsPosition(io) {
-        io.on('connection', async (socket) => {
+    fetchDelayedTrainsPosition: async function fetchDelayedTrainsPosition(namespace) {
+        namespace.on('connection', async (socket) => {
             console.log('a user connected');
 
             const queryDelayed = `
@@ -191,6 +191,40 @@ const trains = {
             eventSource.onerror = function() {
                 console.log("EventSource failed.");
             };
+        });
+    },
+
+    manageTrainLock: function manageTrainLock(namespace) {
+        let trains = {};
+
+        namespace.on('connection', (socket) => {
+            console.log(`A user connected to trainLock with socket id: ${socket.id}`);
+
+            socket.on('disconnect', (reason) => {
+                console.log(`${reason}`);
+                console.log(`Socket with the following id is now closing: ${socket.id}`);
+                socket.disconnect();
+            });
+
+            socket.on('lockTrain', (id) => {
+                if (id in trains) { //Try "id in trains" to make this validate in eslint.
+                    trains[id].push(socket.id);
+                } else {
+                    trains[id] = [socket.id];
+                }
+
+                namespace.emit('trains', trains);
+            });
+
+            socket.on('unlockTrain', (id) => {
+                trains[id] = trains[id].filter((theId) => theId !== socket.id);
+
+                if (trains[id].length === 0) {
+                    delete trains[id];
+                }
+
+                namespace.emit('trains', trains);
+            });
         });
     },
 };

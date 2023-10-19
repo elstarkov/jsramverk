@@ -36,5 +36,9 @@
     "socket.io-client": "^4.7.2",
     "sqlite": "^4.2.1",
     "sqlite3": "^5.1.6"
+  },
+  "optionalDependencies": {
+    "bufferutil": "^4.0.8",
+    "utf-8-validate": "^5.0.10"
   }
 }
