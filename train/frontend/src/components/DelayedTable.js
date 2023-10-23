@@ -26,10 +26,13 @@ function DelayedTable(props) {
                     className="delayed-trains-container delayed-trains">
                     <div className="train-number">{item.OperationalTrainNumber}</div>
                     <div className="current-station">
-                        <div>{item.LocationSignature}</div>
-                        <div>
-                            {item.FromLocation ? `${item.FromLocation[0].LocationName} -> ` : ''}{' '}
-                            {item.ToLocation ? item.ToLocation[0].LocationName : ''}
+                        <div className="station">
+                            <h3>
+                                {item.FromLocation
+                                    ? `${item.FromLocation[0].LocationName} \u2192 `
+                                    : ''}{' '}
+                                {item.ToLocation ? `${item.ToLocation[0].LocationName}` : ''}
+                            </h3>
                         </div>
                     </div>
                     <div className="delay">{outputDelay(item)} minuter</div>
