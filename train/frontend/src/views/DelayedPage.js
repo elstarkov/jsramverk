@@ -8,13 +8,21 @@ import { apiUrl } from '../api';
 import './DelayedPage.css';
 
 function DelayedPage() {
-    const [delayedTrains, setData] = useState({});
+    const [delayedTrains, setDelayedTrains] = useState({});
     const [filter, setFilter] = useState(null);
     const [markers, setMarkers] = useState({});
     const [rows, setRows] = useState({});
 
     const location = useLocation();
     const token = location.state.token;
+
+    /*
+        Hämta delayed, filtrera i frontend, skicka listan till backend, sortera upp backend
+        EMIT lista med tågnummer om det finns tåg annars om den är tom skriv ut i frontend.
+        Backend ON gör en query med listan och generera en sseurl.
+        Backend EMIT sseurl to frontend to make sure it has been made.
+        Frontend EMIT sseurl to backend to create the event source.
+    */
 
     useEffect(() => {
         async function fetchData() {
@@ -34,7 +42,7 @@ function DelayedPage() {
                     }
                 });
             }
-            setData(uniqueObjects);
+            setDelayedTrains(uniqueObjects);
         }
 
         fetchData();
@@ -42,6 +50,20 @@ function DelayedPage() {
 
     useEffect(() => {
         const socket = io(`${apiUrl}/Delayed`);
+
+        let trainArr = [];
+        for (const trainNr in delayedTrains) {
+            trainArr.push(trainNr);
+        }
+
+        if (trainArr.length > 0) {
+            const trainStr = trainArr.join(', ');
+            socket.emit('filter', trainStr);
+        }
+
+        socket.on('created sseurl', (url) => {
+            socket.emit('start event source', url);
+        });
 
         socket.on('message', (data) => {
             if (delayedTrains[data.trainnumber]) {
@@ -65,7 +87,7 @@ function DelayedPage() {
         return () => {
             socket.disconnect();
         };
-    }, [delayedTrains, filter]);
+    }, [delayedTrains]);
 
     const handleFilterButton = (newFilter) => {
         const theFilter = typeof filter === 'string' ? null : newFilter;

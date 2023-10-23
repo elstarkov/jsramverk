@@ -57,3 +57,7 @@
 .filter-btn:hover {
     text-decoration: underline;
 }
+
+.station {
+    display: flex;
+}
