@@ -16,14 +16,6 @@ function DelayedPage() {
     const location = useLocation();
     const token = location.state.token;
 
-    /*
-        Hämta delayed, filtrera i frontend, skicka listan till backend, sortera upp backend
-        EMIT lista med tågnummer om det finns tåg annars om den är tom skriv ut i frontend.
-        Backend ON gör en query med listan och generera en sseurl.
-        Backend EMIT sseurl to frontend to make sure it has been made.
-        Frontend EMIT sseurl to backend to create the event source.
-    */
-
     useEffect(() => {
         async function fetchData() {
             setMarkers({});
@@ -49,7 +41,7 @@ function DelayedPage() {
     }, [filter]);
 
     useEffect(() => {
-        const socket = io(`${apiUrl}/Delayed`);
+        const socket = io(`${apiUrl}Delayed`);
 
         let trainArr = [];
         for (const trainNr in delayedTrains) {

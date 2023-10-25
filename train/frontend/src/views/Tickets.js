@@ -30,7 +30,7 @@ function TicketPage() {
 
         fetchCodes();
 
-        const trainSocket = io(`${apiUrl}/LockedTrains`);
+        const trainSocket = io(`${apiUrl}LockedTrains`);
 
         trainSocket.emit('lockTrain', trainData.OperationalTrainNumber);
 
@@ -49,12 +49,14 @@ function TicketPage() {
         return () => {
             trainSocket.emit('unlockTrain', trainData.OperationalTrainNumber);
             window.removeEventListener('beforeunload', handleTrainUnload);
-            trainSocket.disconnect();
+            setTimeout(() => {
+                trainSocket.disconnect();
+            }, 2000);
         };
     }, []);
 
     useEffect(() => {
-        const socket = io(`${apiUrl}/Tickets`);
+        const socket = io(`${apiUrl}Tickets`);
         setSocket(socket);
 
         socket.on('tickets', (data) => {
@@ -70,7 +72,9 @@ function TicketPage() {
         return () => {
             socket.emit('unlocked', openTicketId);
             window.removeEventListener('beforeunload', handleTicketUnload);
-            socket.disconnect();
+            setTimeout(() => {
+                socket.disconnect();
+            }, 2000);
         };
     }, [openTicketId]);
 
