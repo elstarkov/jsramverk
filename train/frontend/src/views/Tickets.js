@@ -132,11 +132,11 @@ function TicketPage() {
                     </Link>
                 </h4>
                 <h1>Nytt ärende #{tickets.length + 1}</h1>
+                <h3>Tågnummer: {trainData.OperationalTrainNumber}</h3>
                 {trainData.FromLocation ? (
                     <h3>
                         Tåg från {trainData.FromLocation[0].LocationName} till{' '}
-                        {trainData.ToLocation[0].LocationName}. Just nu i{' '}
-                        {trainData.LocationSignature}.
+                        {trainData.ToLocation[0].LocationName}.
                     </h3>
                 ) : (
                     ''
